@@ -11,22 +11,30 @@ function GetRequest({ refetchTrigger }) {
     });
     const [isLoading, setIsLoading] = useState(true);
     
+    const fetch_users = async (url, append) => {
+        setIsLoading(true);
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            if (append) {
+                setUsers(prev => [...prev, ...data.users]);  
+            } else {
+                setUsers(data.users);  
+            }
+            setLinks({
+                next: data.links.next_url || null,
+                prev: data.links.prev_url || null
+            })
+        } catch (error) {
+            console.error("Error fetching users: ", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     useEffect(() => {
         setIsLoading(true);
-        fetch(`${API_BASE}/users?page=1&count=6`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setUsers(data.users);
-                setLinks({
-                    next: data.links.next_url || null,
-                    prev: data.links.prev_url || null
-                })
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+        fetch_users(`${API_BASE}/users?page=1&count=6`, false);
     }, [refetchTrigger])
 
     const ShowMoreUsers = () => {
@@ -34,23 +42,7 @@ function GetRequest({ refetchTrigger }) {
             return;
         }
         setIsLoading(true);
-        fetch(links.next)
-            .then((res) =>{
-                return res.json();
-            })
-            .then((data) => {
-                if (!data.success){
-                    return;
-                }
-                setUsers(prevUsers => [...prevUsers, ...data.users]);
-                setLinks({
-                    next: data.links?.next_url || null,
-                    prev: data.links?.prev_url || null
-                })
-            })
-            .finally(() => {
-                setIsLoading(false);
-            })
+        fetch_users(links.next, true);
     }
 
   const isNextLink = links.next;

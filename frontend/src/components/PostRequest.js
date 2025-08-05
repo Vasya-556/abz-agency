@@ -9,7 +9,7 @@ function PostRequest({ onSuccess }) {
     email: "",
     phone: "",
     photo: null,
-    positionId: null,
+    position_id: null,
     token: "",
   });
   const [formErrors, setFormErrors] = useState({
@@ -17,6 +17,7 @@ function PostRequest({ onSuccess }) {
     email: "",
     phone: "",
     photo: "",
+    position_id: "",
     result: ""
   });
   const [showSuccessImage, setShowSuccessImage] = useState(false);
@@ -25,28 +26,34 @@ function PostRequest({ onSuccess }) {
       formData.email && !formErrors.email &&
       formData.phone && !formErrors.phone &&
       formData.photo && !formErrors.photo &&
-      formData.positionId && formData.token && !formErrors.result;
+      formData.position_id && formData.token && !formErrors.result;
   const buttonClass = allFields ? "button": "button-gray";
 
+  const fetch_token = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/token`);
+      const data = await res.json();
+      setFormData(prev => ({
+        ...prev,
+        token: data.token
+      }));
+    } catch (error) {
+      console.error("Error fetching token: ", error);
+    }
+  }
+
+  const fetch_position = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/positions`);
+      const data = await res.json();
+      setPositions(data.positions);
+    } catch (error) {
+      console.error("Error fetching positions: ", error);
+    }
+  }
   useEffect(() => {
-    fetch(`${API_BASE}/positions`)
-      .then((res) => {
-          return res.json();
-      })
-      .then((data) => {
-          setPositions(data.positions);
-      })
-    
-    fetch(`${API_BASE}/token`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setFormData(prev => ({
-          ...prev,
-          token: data.token
-        }));
-      })
+    fetch_position();
+    fetch_token();
   }, [])
 
   const resetFormFields = () => {
@@ -55,8 +62,8 @@ function PostRequest({ onSuccess }) {
       email: "",
       phone: "",
       photo: null,
-      positionId: null,
-      token: "",
+      position_id: null,
+      token: formData.token,
     });
 
     setFormErrors({
@@ -64,11 +71,21 @@ function PostRequest({ onSuccess }) {
       email: "",
       phone: "",
       photo: "",
+      position_id: "",
+      result: ""
     });
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, retry = 0) => {
     e.preventDefault();
+
+    if (retry > 2) {
+      setFormErrors(prev => ({
+        ...prev,
+        result: "Failed to submit for unkown reasons. Please refresh the page and try again."
+      }));
+      return;
+    }
 
     if (
       !(allFields)
@@ -80,7 +97,7 @@ function PostRequest({ onSuccess }) {
       submitData.append("name", formData.name);
       submitData.append("email", formData.email);
       submitData.append("phone", formData.phone);
-      submitData.append("position_id", formData.positionId);
+      submitData.append("position_id", formData.position_id);
       submitData.append("photo", formData.photo);
 
       const response = await fetch(`${API_BASE}/users`, {
@@ -99,7 +116,32 @@ function PostRequest({ onSuccess }) {
       }
       else {
         console.log(result);
-        // alert("user not created" + result.message);
+        if (result.message === "User with this phone or email already exist"){
+          setFormErrors(prev => ({
+            ...prev,
+            email: result.message,
+            phone: result.message
+          }))
+          return
+        }
+        else if (result.message === "Validation failed" && result.fails){
+          const newErrors = {
+            name: result.fails.name?.[0] || "",
+            email: result.fails.email?.[0] || "",
+            phone: result.fails.phone?.[0] || "",
+            photo: result.fails.photo?.[0] || "",
+            position_id: result.fails.position_id?.[0] || "",
+          };
+          setFormErrors((prev) => ({
+            ...prev,
+            ...newErrors,
+          }));
+          return
+        } else if (result.message === "The token expired."){
+          await fetch_token();
+          handleSubmit(e);
+          return;
+        }
         setFormErrors(prev => ({
           ...prev,
           result: result.message
@@ -255,8 +297,12 @@ function PostRequest({ onSuccess }) {
   const changeRole = (id) => {
     setFormData(prev => ({
       ...prev,
-      positionId: id
+      position_id: id
     }));
+    setFormErrors(prev => ({
+      ...prev,
+      position_id: ""
+    }))
   }
 
   return (
@@ -321,16 +367,17 @@ function PostRequest({ onSuccess }) {
                     ))
                   }
                 </div>
+                {formErrors.position_id && <p className="Error">{formErrors.position_id}</p>}
               </div>
 
               <div className="field-group">
-                <input onChange={handlePhotoChange} className="input-file" type="file"></input>
+                <input onChange={handlePhotoChange} className="input-file" type="file" accept="image/jpeg,image/jpg"></input>
                 {formErrors.photo && <p className="Error">{formErrors.photo}</p>}
               </div>
               
             </div>
             <div className="PostRequest-button">
-              <button onClick={handleSubmit} className={buttonClass}>Sign up</button>
+              <button className={buttonClass}>Sign up</button>
             </div>
           </form>
         }
