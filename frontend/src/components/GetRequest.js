@@ -58,11 +58,9 @@ function GetRequest({ refetchTrigger }) {
   return (
     <div className="GetRequest">
         <h1>Working with GET request</h1>
-        {isLoading? 
+        {users.length === 0? <>
             <Preloader/>
-        : 
-        
-        <>
+        </>: <>
             <div className="Cards">
                 <div className="Card-container">
                     {users.map((user) => (
@@ -92,9 +90,8 @@ function GetRequest({ refetchTrigger }) {
                 </div>
             </div>
             {isNextLink && <button onClick={ShowMoreUsers} className="button">Show more</button>}
-        </>
-        }
-        
+        {isLoading&& <Preloader/>}
+        </>}
     </div>
   )
 }
