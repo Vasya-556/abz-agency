@@ -12,9 +12,14 @@
 
 .post-request-header {
     display: flex;
-    align-items: flex-end;
-    justify-content: center; 
+    flex-direction: column; 
+    align-items: center;   
+    justify-content: center;
     text-align: center;
+}
+
+.post-request-header img {
+    margin-top: 50px;
 }
 
 .error-header {

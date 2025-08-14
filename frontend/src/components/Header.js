@@ -10,7 +10,7 @@ function Header() {
         <div className="header-buttons">
           <button className="button"
           onClick={() => {
-            const element = document.querySelector('.GetRequest');
+            const element = document.querySelector('.get-request');
             if (element) {
               element.scrollIntoView({ behavior: 'smooth' });
             }
@@ -18,7 +18,7 @@ function Header() {
           >Users</button>
           <button className="button"
           onClick={() => {
-            const element = document.querySelector('.PostRequest');
+            const element = document.querySelector('.post-request');
             if (element) {
               element.scrollIntoView({ behavior: 'smooth' });
             }

@@ -13,7 +13,7 @@ function ImageContainer() {
           </div>
             <button className="button"
             onClick={() => {
-              const element = document.querySelector('.PostRequest');
+              const element = document.querySelector('.post-request');
               if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
