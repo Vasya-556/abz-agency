@@ -154,7 +154,7 @@
 
 .field-group-photo {
     position: relative;
-    width: 380px;
+    /* width: 380px; */
     height: 54px;
     box-sizing: border-box;
     border: 1px solid var(--border);
@@ -248,8 +248,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }   
+
+    .post-request-container {
+        width: 380px; 
     }
-    
 }
 
 @media (min-width: 1024px) {
@@ -258,7 +261,7 @@
     }
 }
 
-@media (min-width: 2056px) {
+@media (min-width: 2560px) {
     .post-request {
         width: 1170px;
     }
