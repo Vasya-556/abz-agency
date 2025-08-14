@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/abz-agency/static/css/main.e1d86284.css",
+    "main.js": "/abz-agency/static/js/main.0ee0eb81.js",
+    "static/js/453.670e15c7.chunk.js": "/abz-agency/static/js/453.670e15c7.chunk.js",
+    "static/media/pexels-alexandr-podvalny-1227513.jpeg": "/abz-agency/static/media/pexels-alexandr-podvalny-1227513.be7665f876bbd9138501.jpeg",
+    "static/media/success-image.svg": "/abz-agency/static/media/success-image.0d3202ba11b04fa7364b0f83ce42aea5.svg",
+    "static/media/Logo.svg": "/abz-agency/static/media/Logo.8bb55362d01d55393ccc5476d96f0c14.svg",
+    "static/media/photo-cover.svg": "/abz-agency/static/media/photo-cover.fb98cf13a87225efe558669bdc541ac7.svg",
+    "index.html": "/abz-agency/index.html",
+    "main.e1d86284.css.map": "/abz-agency/static/css/main.e1d86284.css.map",
+    "main.0ee0eb81.js.map": "/abz-agency/static/js/main.0ee0eb81.js.map",
+    "453.670e15c7.chunk.js.map": "/abz-agency/static/js/453.670e15c7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e1d86284.css",
+    "static/js/main.0ee0eb81.js"
+  ]
+}
