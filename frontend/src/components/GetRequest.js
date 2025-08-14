@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import photoCover from '../assets/photo-cover.svg'
+import photoCover from '../assets/svgs/photo-cover.svg'
 import API_BASE from '../utils/api'; 
 import Preloader from "./Preloader";
+import './GetRequest.css';
 
 function GetRequest({ refetchTrigger }) {
     const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ function GetRequest({ refetchTrigger }) {
     });
     const [isLoading, setIsLoading] = useState(true);
     
-    const fetch_users = async (url, append) => {
+    const fetchUsers = async (url, append) => {
         setIsLoading(true);
         try {
             const res = await fetch(url);
@@ -34,54 +35,56 @@ function GetRequest({ refetchTrigger }) {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch_users(`${API_BASE}/users?page=1&count=6`, false);
+        fetchUsers(`${API_BASE}/users?page=1&count=6`, false);
     }, [refetchTrigger])
 
-    const ShowMoreUsers = () => {
+    const showMoreUsers = () => {
         if (!links.next){
             return;
         }
         setIsLoading(true);
-        fetch_users(links.next, true);
+        fetchUsers(links.next, true);
     }
 
-  const isNextLink = links.next;
+    const handleImageError = (e) => {
+        e.target.onerror = null;
+        e.target.src = photoCover;
+    };
+
+    const isNextLink = links.next;
 
   return (
-    <div className="GetRequest">
-        <h1>Working with GET request</h1>
+    <div className="get-request">
+        <h1 className="text-large">Working with GET request</h1>
         {users.length === 0? <>
             <Preloader/>
         </>: <>
-            <div className="Cards">
-                <div className="Card-container">
+            <div className="cards">
+                <div className="card-container">
                     {users.map((user) => (
-                        <div key={user.id} className="Card">
+                        <div key={user.id} className="card">
                             <img 
                                 src={user.photo} 
-                                alt=""
-                                onError={(e) => {
-                                    e.target.onerror = null; 
-                                    e.target.src = photoCover;
-                                }}
+                                alt={`${user.name}'s profile`}
+                                onError={handleImageError}
                             ></img>
-                            <p>
+                            <p className="username text-base">
                                 <span className="tooltip">
                                     <span className="truncate">{user.name}</span>
                                     <span className="tooltiptext">{user.name}</span>
                                 </span>
                             </p>
-                            <p>{user.position} <br/>
+                            <p className="user-info text-base">{user.position} <br/>
                             <span className="tooltip">
                                 <span className="truncate">{user.email}</span>
                                 <span className="tooltiptext">{user.email}</span>
-                            </span><br/>
+                            </span>
                             {user.phone}</p>
                         </div>
                     ))}
                 </div>
             </div>
-            {isNextLink && <button onClick={ShowMoreUsers} className="button">Show more</button>}
+            {isNextLink && <button onClick={showMoreUsers} className="button">Show more</button>}
         {isLoading&& <Preloader/>}
         </>}
     </div>

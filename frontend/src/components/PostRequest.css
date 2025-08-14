@@ -1,0 +1,260 @@
+.post-request {
+    width: 328px;
+    margin-bottom: 100px;
+}
+
+.post-request-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.post-request-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center; 
+    text-align: center;
+}
+
+.error-header {
+    color: var(--error);
+    font-size: 18px;
+    line-height: 16px;
+    margin-left: 10px;
+}
+
+.post-request-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.name-email-phone-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.field-group {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 328px;
+    height: 54px;
+    padding: 14px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px; 
+
+    color: var(--gray);
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.helper, .error {
+    position: absolute;
+    top: 100%; 
+    left: 10px; 
+    margin-top: 4px; 
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.helper {
+    color: var(--gray);
+}
+
+.error {
+    color: var(--error);
+}
+
+.position-photo-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.file-input {
+    opacity: 0;
+    position: absolute;
+    height: 54px;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.radio-group input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    vertical-align: middle;
+}
+
+.radio-group input[type="radio"]:checked {
+    border: 1px solid var(--secondary);
+}
+
+.radio-group input[type="radio"]:checked::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+}
+
+.radio-group label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: rgba(0, 0, 0, 0.87);
+    margin-left: 10px;
+    user-select: none;
+}
+
+.post-request-radio-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6.5px;
+    max-width: 380px;
+    width: 100%;
+    margin-top: -5px;
+    margin-left: -5px;
+}
+
+.field-group-photo {
+    position: relative;
+    width: 380px;
+    height: 54px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    color: var(--gray);
+}
+
+.custom-file-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 12px;
+    box-sizing: border-box;
+}
+
+.upload-button {
+    height: 54px;
+    width: 83px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: 4px 0 0 4px;
+    background-color: var(--background);
+    color: rgba(0, 0, 0, 0.87);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.file-name {
+    padding-left: 14px;
+    color: var(--gray);
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-request-button {
+    display: flex;
+    justify-content: center;
+}
+
+.button-gray {
+    background-color: #B4B4B4;
+    color: var(--white);
+    width: 100px;
+    height: 34px;
+    border-radius: 16px;
+    padding: 8px;
+    border: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    vertical-align: middle;
+    letter-spacing: 0;
+}
+
+@media (min-width: 768px) {
+    .post-request {
+        width: 704px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .post-request-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media (min-width: 1024px) {
+    .post-request {
+        width: 904px;
+    }
+}
+
+@media (min-width: 2056px) {
+    .post-request {
+        width: 1170px;
+    }
+}

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import API_BASE from '../utils/api';
-import successImage from '../assets/success-image.svg';
+import successImage from '../assets/svgs/success-image.svg';
+import './PostRequest.css';
 
 function PostRequest({ onSuccess }) {
   const [positions, setPositions] = useState([]);
@@ -79,7 +80,7 @@ function PostRequest({ onSuccess }) {
   const handleSubmit = async (e, retry = 0) => {
     e.preventDefault();
 
-    if (retry > 2) {
+    if (retry > 1) {
       setFormErrors(prev => ({
         ...prev,
         result: "Failed to submit for unkown reasons. Please refresh the page and try again."
@@ -306,77 +307,90 @@ function PostRequest({ onSuccess }) {
   }
 
   return (
-    <div className="PostRequest">
+    <div className="post-request">
         {showSuccessImage? 
-          <div>
-            <h1>User successfully registered</h1>
+          <div className="post-request-header">
+            <h1 className="text-large">User successfully registered</h1>
             <img 
               src={successImage}
-              alt=""
+              alt="Success image"
               ></img> 
           </div>
           :
-          <form onSubmit={handleSubmit}>
+          <form className="post-request-form" onSubmit={handleSubmit}>
             
-            <div className="PostRequest-header">
-              <h1>Working with post request</h1>
-              {formErrors.result && <p className="Error-header">{formErrors.result}</p>}
+            <div className="post-request-header">
+              <h1 className="text-large">Working with POST request</h1>
+              {formErrors.result && <p className="error-header">{formErrors.result}</p>}
             </div>
-            <div className="PostRequest-container">
-              <div className="field-group">
-                <input 
-                  className="input" 
-                  placeholder="Your name"
-                  value={formData.name}
-                  onChange={handleNameChange}  
-                />
-                {formErrors.name && <p className="Error">{formErrors.name}</p>}
-              </div>
-
-              <div className="field-group">
-                <input 
-                  className="input" 
-                  placeholder="Email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleEmailChange}  
-                />
-                {formErrors.email && <p className="Error">{formErrors.email}</p>}
-              </div>
-
-              <div className="field-group">  
-                <input 
-                  className="input" 
-                  placeholder="Phone"
-                  value={formData.phone}
-                  onChange={handlePhoneChange}  
-                />
-                <p className={formErrors.phone ? "Error" : "Helper"}>
-                  {formErrors.phone || "+38 (XXX) XXX - XX - XX"}
-                </p>
-              </div>
-              
-              <div className="field-group">
-                <div className="PostReguest-radioButtons">
-                  {
-                    positions.map((p) => (
-                      <div key={p.id} className="radio-group">
-                          <input onChange={() => changeRole(p.id)} id={p.name} type="radio" name="role"></input>
-                          <label htmlFor={p.name}>{p.name}</label>
-                      </div>
-                    ))
-                  }
+            <div className="post-request-container">
+              <div className="name-email-phone-inputs">
+                <div className="field-group">
+                  <input 
+                    className="input" 
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleNameChange}  
+                  />
+                  {formErrors.name && <p className="error">{formErrors.name}</p>}
                 </div>
-                {formErrors.position_id && <p className="Error">{formErrors.position_id}</p>}
-              </div>
 
-              <div className="field-group">
-                <input onChange={handlePhotoChange} className="input-file" type="file" accept="image/jpeg,image/jpg"></input>
-                {formErrors.photo && <p className="Error">{formErrors.photo}</p>}
+                <div className="field-group">
+                  <input 
+                    className="input" 
+                    placeholder="Email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleEmailChange}  
+                  />
+                  {formErrors.email && <p className="error">{formErrors.email}</p>}
+                </div>
+
+                <div className="field-group">  
+                  <input 
+                    className="input" 
+                    placeholder="Phone"
+                    value={formData.phone}
+                    onChange={handlePhoneChange}  
+                  />
+                  <p className={formErrors.phone ? "error" : "helper"}>
+                    {formErrors.phone || "+38 (XXX) XXX - XX - XX"}
+                  </p>
+                </div>
               </div>
-              
+              <div className="position-photo-inputs">
+                <div className="field-group">
+                  <p>Select your position</p>
+                  <div className="post-request-radio-buttons">
+                    {
+                      positions.map((p) => (
+                        <div key={p.id} className="radio-group">
+                            <input onChange={() => changeRole(p.id)} id={p.name} type="radio" name="role"></input>
+                            <label htmlFor={p.name}>{p.name}</label>
+                        </div>
+                      ))
+                    }
+                  </div>
+                  {formErrors.position_id && <p className="error">{formErrors.position_id}</p>}
+                </div>
+
+                <div className="field-group-photo">
+                  <input
+                    type="file"
+                    id="file-upload"
+                    accept="image/jpeg,image/jpg"
+                    onChange={handlePhotoChange}
+                    className="file-input"
+                  />
+                  <div className="custom-file-container">
+                    <label htmlFor="file-upload" className="upload-button">Upload</label>
+                    <span className="file-name">{formData.photo ? formData.photo.name : 'Upload your photo'}</span>
+                  </div>
+                  {formErrors.photo && <p className="error">{formErrors.photo}</p>}
+                </div>
+              </div>              
             </div>
-            <div className="PostRequest-button">
+            <div className="post-request-button">
               <button className={buttonClass}>Sign up</button>
             </div>
           </form>
