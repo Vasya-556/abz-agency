@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/abz-agency/static/css/main.d44936f5.css",
-    "main.js": "/abz-agency/static/js/main.00d2d89f.js",
+    "main.css": "/abz-agency/static/css/main.c30da924.css",
+    "main.js": "/abz-agency/static/js/main.9a84dcea.js",
     "static/js/453.670e15c7.chunk.js": "/abz-agency/static/js/453.670e15c7.chunk.js",
     "static/media/pexels-alexandr-podvalny-1227513.jpeg": "/abz-agency/static/media/pexels-alexandr-podvalny-1227513.be7665f876bbd9138501.jpeg",
+    "static/media/Nunito-Regular.ttf": "/abz-agency/static/media/Nunito-Regular.5c82641fd5d0f561cb29.ttf",
     "static/media/pexels-alexandr-podvalny-1227513.webp": "/abz-agency/static/media/pexels-alexandr-podvalny-1227513.98f0b809e0966e0c64f9.webp",
     "static/media/success-image.svg": "/abz-agency/static/media/success-image.0d3202ba11b04fa7364b0f83ce42aea5.svg",
     "static/media/Logo.svg": "/abz-agency/static/media/Logo.8bb55362d01d55393ccc5476d96f0c14.svg",
     "static/media/photo-cover.svg": "/abz-agency/static/media/photo-cover.fb98cf13a87225efe558669bdc541ac7.svg",
     "index.html": "/abz-agency/index.html",
-    "main.d44936f5.css.map": "/abz-agency/static/css/main.d44936f5.css.map",
-    "main.00d2d89f.js.map": "/abz-agency/static/js/main.00d2d89f.js.map",
+    "main.c30da924.css.map": "/abz-agency/static/css/main.c30da924.css.map",
+    "main.9a84dcea.js.map": "/abz-agency/static/js/main.9a84dcea.js.map",
     "453.670e15c7.chunk.js.map": "/abz-agency/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d44936f5.css",
-    "static/js/main.00d2d89f.js"
+    "static/css/main.c30da924.css",
+    "static/js/main.9a84dcea.js"
   ]
 }
