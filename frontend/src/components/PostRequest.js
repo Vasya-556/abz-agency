@@ -313,7 +313,7 @@ function PostRequest({ onSuccess }) {
             <h1 className="text-large">User successfully registered</h1>
             <img 
               src={successImage}
-              alt="Success image"
+              alt="Success"
               ></img> 
           </div>
           :

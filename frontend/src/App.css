@@ -10,6 +10,14 @@
     --loaderSize: 60;
 }
 
+@font-face {
+    font-family: 'Nunito';
+    src: url('./assets/fonts/Nunito-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 body{
     background-color: var(--background);
     font-family: "Nunito", sans-serif;
@@ -35,6 +43,7 @@ body{
 
 .button {
     background-color: var(--primary);
+    color: var(--black87);
     width: 100px;
     height: 34px;
     border-radius: 16px;
@@ -50,6 +59,9 @@ body{
     text-align: center;
     vertical-align: middle;
     letter-spacing: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .button:hover {

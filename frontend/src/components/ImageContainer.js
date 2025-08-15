@@ -1,11 +1,29 @@
 import React from 'react'
 import backgroundImage from '../assets/images/pexels-alexandr-podvalny-1227513.jpeg';
+import backgroundImageWebp from '../assets/images/pexels-alexandr-podvalny-1227513.webp';
 import './ImageContainer.css';
 
 function ImageContainer() {
   return (
     <div className="image-container">
-        <img className="image-container-image" src={backgroundImage} alt="pexels-alexandr-podvalny-1227513.jpeg"></img>
+        {/* <img className="image-container-image" src={backgroundImage} alt="pexels-alexandr-podvalny-1227513.jpeg"></img> */}
+        <picture>
+          <source srcSet={backgroundImageWebp} type="image/webp" />
+          <img
+            className="image-container-image"
+            src={backgroundImage}
+            alt="pexels-alexandr-podvalny-1227513.jpeg"
+            fetchPriority="high"
+          />
+        </picture>
+        {/* <LazyLoadImage
+          alt="pexels-alexandr-podvalny-1227513.jpeg"
+          src={backgroundImage}
+          placeholderSrc={backgroundImageSmall} 
+          effect="blur"
+          className="image-container-image"
+          wrapperClassName="image-container-image-wrapper"
+        /> */}
         <div className="image-container-text-block">
           <div className="image-container-text">
             <h1 className="text-large">Test assignment for front-end developer</h1>

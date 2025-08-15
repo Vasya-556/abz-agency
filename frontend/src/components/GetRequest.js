@@ -3,6 +3,7 @@ import photoCover from '../assets/svgs/photo-cover.svg'
 import API_BASE from '../utils/api'; 
 import Preloader from "./Preloader";
 import './GetRequest.css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function GetRequest({ refetchTrigger }) {
     const [users, setUsers] = useState([]);
@@ -63,11 +64,19 @@ function GetRequest({ refetchTrigger }) {
                 <div className="card-container">
                     {users.map((user) => (
                         <div key={user.id} className="card">
-                            <img 
+                            {/* <img 
                                 src={user.photo} 
                                 alt={`${user.name}'s profile`}
                                 onError={handleImageError}
-                            ></img>
+                            ></img> */}
+                            <LazyLoadImage
+                                alt={`${user.name}'s profile`}
+                                src={user.photo}
+                                onError={handleImageError}
+                                effect="blur"
+                                placeholderSrc={photoCover}
+                                className="user-image"
+                            />
                             <p className="username text-base">
                                 <span className="tooltip">
                                     <span className="truncate">{user.name}</span>
